@@ -16,7 +16,7 @@ const StudyClock = () => {
   const intervalOn = intervalId !== null 
 
   
-
+  const isNegativeTimer = timer === -1; 
   useEffect(() => {
     if (timer === -1 ) {
       audio.current.play()
@@ -27,12 +27,12 @@ const StudyClock = () => {
         setSessionType("Session");
         setTimer(sessionTime)
       }
-      }
-    }, [timer === -1 ]) 
+      } 
+    },[isNegativeTimer]) // eslint-disable-line
 
   useEffect(() => {
     setTimer(sessionType ? sessionTime : breakTime)
-  }, [sessionTime, breakTime]) //use Effect for the session/break up + down buttons + changing timer start 
+  }, [sessionTime, breakTime, sessionType]) //use Effect for the session/break up + down buttons + changing timer start 
 
   const handleStartStop = () => {
     if (intervalOn) {
